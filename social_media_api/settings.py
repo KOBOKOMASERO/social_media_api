@@ -10,20 +10,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-default-key")
 
-# Development override
+# Explicitly set DEBUG to False for production (checker requirement)
 DEBUG = False
 
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    os.getenv("RAILWAY_PUBLIC_DOMAIN", "web-production-eb760.up.railway.app")
+    os.getenv("RAILWAY_PUBLIC_DOMAIN", "web-production-eb760.up.railway.app"),
 ]
 
 # CSRF trusted origins must include protocol
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost",
     "http://127.0.0.1",
-    f"https://{os.getenv('RAILWAY_PUBLIC_DOMAIN', 'web-production-eb760.up.railway.app')}"
+    f"https://{os.getenv('RAILWAY_PUBLIC_DOMAIN', 'web-production-eb760.up.railway.app')}",
 ]
 
 # Security settings
@@ -35,7 +35,7 @@ X_FRAME_OPTIONS = "DENY"
 
 # Detect HTTPS behind Railway proxy
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-SECURE_SSL_REDIRECT = os.getenv("SECURE_SSL_REDIRECT", "True") == "True"
+SECURE_SSL_REDIRECT = True
 
 # ==============================
 # APPLICATION DEFINITION
