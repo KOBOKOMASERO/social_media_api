@@ -10,7 +10,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-default-key")
 
-# Explicitly set DEBUG to False for production (checker requirement)
 DEBUG = False
 
 ALLOWED_HOSTS = [
