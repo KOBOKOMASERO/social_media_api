@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY & ENVIRONMENT
 # ==============================
 
-SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-default-key")  # Replace with real key in production
+SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-default-key")
 
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
@@ -18,18 +18,23 @@ ALLOWED_HOSTS = [
     os.getenv("RAILWAY_PUBLIC_DOMAIN", "web-production-eb760.up.railway.app")
 ]
 
+# CSRF trusted origins must include protocol
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost",
     "http://127.0.0.1",
-    'web-production-eb760.up.railway.app',
+    f"https://{os.getenv('RAILWAY_PUBLIC_DOMAIN', 'web-production-eb760.up.railway.app')}"
 ]
 
+# Security settings
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 X_FRAME_OPTIONS = "DENY"
-SECURE_SSL_REDIRECT = os.getenv("SECURE_SSL_REDIRECT", "False") == "True"
+
+# Detect HTTPS behind Railway proxy
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SECURE_SSL_REDIRECT = os.getenv("SECURE_SSL_REDIRECT", "True") == "True"
 
 # ==============================
 # APPLICATION DEFINITION
@@ -94,13 +99,12 @@ TEMPLATES = [
 WSGI_APPLICATION = "social_media_api.wsgi.application"
 
 # ==============================
-# DATABASE CONFIGURATION (UPDATED)
+# DATABASE CONFIGURATION
 # ==============================
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-# Use Railway PostgreSQL if DATABASE_URL is valid; otherwise fallback to SQLite
-if DATABASE_URL and "user" not in DATABASE_URL and "password" not in DATABASE_URL:
+if DATABASE_URL and "postgres" in DATABASE_URL:
     DATABASES = {
         "default": dj_database_url.parse(DATABASE_URL, conn_max_age=600, ssl_require=True)
     }
