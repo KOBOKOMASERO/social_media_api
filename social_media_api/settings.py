@@ -11,10 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-default-key")
 
 # Development override
-if os.getenv("RAILWAY_ENVIRONMENT") == "production":
-    DEBUG = False
-else:
-    DEBUG = os.getenv("DEBUG", "True") == "True"
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "localhost",
