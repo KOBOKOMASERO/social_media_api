@@ -21,7 +21,7 @@ ALLOWED_HOSTS = [
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost",
     "http://127.0.0.1",
-    f"https://{os.getenv('RAILWAY_PUBLIC_DOMAIN', 'web-production-eb760.up.railway.app')}"
+    'web-production-eb760.up.railway.app',
 ]
 
 SECURE_CONTENT_TYPE_NOSNIFF = True
