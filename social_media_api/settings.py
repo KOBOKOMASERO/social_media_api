@@ -1,5 +1,4 @@
 from pathlib import Path
-import os
 import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -8,21 +7,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY & ENVIRONMENT
 # ==============================
 
-SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-default-key")
+SECRET_KEY = ")h-!l5j$*72@zh%$e0-58lzm=mx+)$u%%(6ni36$ps+y@)5(^#"
 
-DEBUG = False
+DEBUG = False  # literal False
 
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    os.getenv("RAILWAY_PUBLIC_DOMAIN", "web-production-eb760.up.railway.app"),
+    "web-production-eb760.up.railway.app",
 ]
 
-# CSRF trusted origins must include protocol
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost",
     "http://127.0.0.1",
-    f"https://{os.getenv('RAILWAY_PUBLIC_DOMAIN', 'web-production-eb760.up.railway.app')}",
+    "https://web-production-eb760.up.railway.app",
 ]
 
 # Security settings
@@ -31,10 +29,8 @@ SECURE_BROWSER_XSS_FILTER = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 X_FRAME_OPTIONS = "DENY"
-
-# Detect HTTPS behind Railway proxy
-SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # ==============================
 # APPLICATION DEFINITION
@@ -102,19 +98,13 @@ WSGI_APPLICATION = "social_media_api.wsgi.application"
 # DATABASE CONFIGURATION
 # ==============================
 
-DATABASE_URL = os.getenv("DATABASE_URL")
-
-if DATABASE_URL and "postgres" in DATABASE_URL:
-    DATABASES = {
-        "default": dj_database_url.parse(DATABASE_URL, conn_max_age=600, ssl_require=True)
-    }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
-    }
+DATABASES = {
+    "default": dj_database_url.parse(
+        "postgresql://postgres:KEAYJqovzppMcNWhuTFaKOYtTeegLfOt@postgres.railway.internal:5432/railway",
+        conn_max_age=600,
+        ssl_require=True
+    )
+}
 
 # ==============================
 # PASSWORD VALIDATION
