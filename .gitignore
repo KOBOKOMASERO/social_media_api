@@ -1,28 +1,28 @@
-# Python
+# Python/Django
 __pycache__/
 *.py[cod]
+*.sqlite3
+db.sqlite3
+venv/
+env/
+.venv/
 *.pyo
 *.pyd
-*.pkl
 
-# Virtual environment
-venv/
-.env
-
-# Django stuff
-*.log
-*.pot
-*.pyc
-*.sqlite3
-media/
-
-# Migrations cache (keep actual migration files)
+# Django migrations (optional, usually we keep them)
+*/migrations/*.py[cod]
 */migrations/__pycache__/
 
-# IDE / editor
+# OS files
+.DS_Store
+*.log
+
+# Node
+node_modules/
+package-lock.json
+npm-debug.log
+yarn.lock
+
+# IDEs
 .vscode/
 .idea/
-*.swp
-
-# OS
-.DS_Store
