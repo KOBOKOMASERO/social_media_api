@@ -94,12 +94,13 @@ TEMPLATES = [
 WSGI_APPLICATION = "social_media_api.wsgi.application"
 
 # ==============================
-# DATABASE CONFIGURATION
+# DATABASE CONFIGURATION (UPDATED)
 # ==============================
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-if DATABASE_URL:
+# Use Railway PostgreSQL if DATABASE_URL is valid; otherwise fallback to SQLite
+if DATABASE_URL and "user" not in DATABASE_URL and "password" not in DATABASE_URL:
     DATABASES = {
         "default": dj_database_url.parse(DATABASE_URL, conn_max_age=600, ssl_require=True)
     }
