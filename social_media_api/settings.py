@@ -15,7 +15,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY & ENVIRONMENT
 # ==============================
 
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv(")h-!l5j$*72@zh%$e0-58lzm=mx+)$u%%(6ni36$ps+y@)5(^#")
 
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
