@@ -19,11 +19,12 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
+ALLOWED_HOSTS = [
+    "web-production-eb760.up.railway.app"
+    ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://*.railway.app",
-    "https://*.onrender.com",
+    "https://web-production-eb760.up.railway.app",
 ]
 
 SECURE_CONTENT_TYPE_NOSNIFF = True
